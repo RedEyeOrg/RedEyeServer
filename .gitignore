@@ -1,0 +1,5 @@
+include/microhttpd
+libmicrohttpd*
+server
+*.o
+*.a
