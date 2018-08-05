@@ -1,24 +1,11 @@
-#!/bin/sh
-
-echo "----- Prebuilt ----- "
-echo ""
-
-
-echo "----- Libmicrohttpd ----- "
-
-rm -rf libmicrohttpd
-mkdir libmicrohttpd
-cd libmicrohttpd
-wget https://ftpmirror.gnu.org/libmicrohttpd/libmicrohttpd-latest.tar.gz
-tar zxvf libmicrohttpd-latest.tar.gz
-rm -f libmicrohttpd-latest.tar.gz
-cd libmicrohttpd*
-./configure
-make -j16
-cp ./src/microhttpd/.libs/libmicrohttpd.a ../../
-mkdir ../../include
-ln -s $(pwd)/src/include ../../include/microhttpd
+git clone https://github.com/babelouest/ulfius
+cd ulfius
+git submodule update --init
+sudo apt-get install libmicrohttpd-dev libjansson-dev libcurl4-gnutls-dev libgnutls28-dev libgcrypt20-dev
+cd ulfius
+cd lib/orcania
+make && sudo make install
+cd ../yder
+make && sudo make install
 cd ../../
-rm -f libmicrohttpd-latest.tar.gz
-
-echo "----- Libmicrohttpd End ----- "
+sudo make install
