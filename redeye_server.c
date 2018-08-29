@@ -37,6 +37,8 @@ void start_server() {
   ulfius_add_endpoint_by_val(&instance, "GET", "/check",
     NULL, 0, &handler_check, NULL);
 
+  ulfius_add_endpoint_by_val(&instance, "GET", "/check",
+    NULL, 0, &handler_check, NULL);
 
   if (ulfius_start_framework(&instance) == U_OK) {
     printf("Start framework on port %d\n", instance.port);

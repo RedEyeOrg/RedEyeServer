@@ -3,7 +3,7 @@
 
 #include <ulfius/ulfius.h>
 
-int handler_upload(const struct _u_request *request,
+int handler_record(const struct _u_request *request,
   struct _u_response *response, void *user_data);
 
 int handler_check(const struct _u_request *request,
