@@ -10,6 +10,7 @@
 #define DEFAULT_PORT 5000
 
 struct _u_instance instance;
+int first_run = 0;
 
 void start_server() {
   server_conf conf;
@@ -23,18 +24,17 @@ void start_server() {
     conf.port = DEFAULT_PORT;
   }
 
-  ulfius_stop_framework(&instance);
-  ulfius_clean_instance(&instance);
+  if (first_run != 0) {
+    ulfius_stop_framework(&instance);
+    ulfius_clean_instance(&instance);
+  }
 
   if (ulfius_init_instance(&instance, conf.port, NULL, NULL) != U_OK) {
     printf("Error ulfius_init_instance, abort\n");
     return;
   }
 
-  ulfius_add_endpoint_by_val(&instance, "POST", "/upload",
-    NULL, 0, &handler_upload, NULL);
-
-  ulfius_add_endpoint_by_val(&instance, "POST", "/check",
+  ulfius_add_endpoint_by_val(&instance, "GET", "/check",
     NULL, 0, &handler_check, NULL);
 
 
@@ -61,7 +61,6 @@ int main(int argc, char *argv[]) {
 
   start_server();
 
-
-  getchar();
+  while (1) {}
   return 0;
 }
